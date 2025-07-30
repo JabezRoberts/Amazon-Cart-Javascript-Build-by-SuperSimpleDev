@@ -20,9 +20,12 @@ if (!score) {
 let isAutoPlaying = false;
 
 let intervalId;
-function autoPlay() {
+
+// const autoPlay = () => {};
+
+function autoPlay() { // prefer this to the arrow function above because it is easier to read and allows hoisting meaning you can call it before it's defined
     if (!isAutoPlaying) {
-        intervalId = setInterval(function() {
+        intervalId = setInterval(() => {
             const playerMove = pickComputerMove()
             playGame(playerMove); // the game will use computerMove to generate a playerMove then run the game every second
         }, 1000);
@@ -32,6 +35,35 @@ function autoPlay() {
         isAutoPlaying = false;
     }
 }
+
+// document.querySelector('.js-rock-button')
+//   .addEventListener('click', playGame('rock')); // this fxn won't work and would return undefined as this runs play game and does not result in a fxn and gives the return value undefined. Instead use
+document.querySelector('.js-rock-button')
+  .addEventListener('click', () => {
+    playGame('rock');
+  });
+
+document.querySelector('.js-paper-button')
+  .addEventListener('click', () => {
+    playGame('paper');
+  });
+
+document.querySelector('.js-scissors-button')
+  .addEventListener('click', () => {
+    playGame('scissors');
+  });
+
+document.body.addEventListener('keydown', (event) => {
+  console.log('keydown');
+  console.log(event.key);
+  if (event.key === 'r') {
+    playGame('rock');
+  } else if (event.key === 'p') {
+    playGame('paper');
+  } else if (event.key === 's') {
+    playGame('scissors');
+  }
+});
 
 function playGame(playerMove) {
   const computerMove = pickComputerMove();

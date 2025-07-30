@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button onclick="" class="js-button">
+        Click
+    </button>
+</body>
+<script>
+    // Gonna use an event listener to access the button above
+    const buttonElement = document.querySelector('.js-button');
+    //Every HTML element has a method called addEventListener(). 
+    // addEventListener() let's us run some code when we interact with the element similar to onclick
+    const eventListener = () => {
+        console.log('clicked')
+    }
+
+    buttonElement.addEventListener('click', eventListener); // takes two params. first is the event to listen for. the word after on in onclick is usually an event. the second is the function we want to run. this is saying run this function when we click this element
+    
+    // addEventListener functions like onclick but with some advantages like allowing us to add more than one event listeners for an event
+     buttonElement.addEventListener('click', () => {
+        console.log('click2')
+    }); 
+    // we can also remove an event listener
+    buttonElement.removeEventListener('click2', eventListener); // Takes 2 params. the first is the event and the second is the fxn we want to remove
+    // therefore best practice is to use addEventListener instead of onclick
+</script>
+</html>

@@ -25,23 +25,45 @@ function renderTodoList(){
     let todoListHTML = '';
 
     // now we rewrite the for loop below
-    todoList.forEach(function(todoObject, index){
+    todoList.forEach((todoObject, index) => {
         const { name, dueDate } = todoObject;
         
         const html = `
             <div>${name}</div>
             <div>${dueDate}</div>
             <div></div>             
-            <button 
-                onclick="todoList1.splice(${index}, 1); 
-                renderTodoList();
-            " class="delete-todo-button">
+            <button class="delete-todo-button js-delete-todo-button">
                 Delete
-            </button> 
+            </button>
+
+            
         `; // Create HTML with each todo - called generating the HTML
         // Add a delete button beside each task, add a splice method to each button with the index of the task to remove that task from the list then render the list again after splicing
+
+        // <div>${name}</div>
+        //     <div>${dueDate}</div>
+        //     <div></div>             
+        //     <!--<button 
+        //         onclick="todoList1.splice(${index}, 1); 
+        //         renderTodoList();
+        //     " class="delete-todo-button js-delete-todo-button">
+        //         Delete
+        //     </button> -->
+        //     <button class="delete-todo-button js-delete-todo-button">
+        //         Delete
+        //     </button>
         
         todoListHTML += html; // now combine the html code and then put it on the page
+
+        // can't add eventListener until after we put the document on the page
+        document.querySelectorAll('.js-delete-todo-button') // use querySelectorAll to get a list of all the delete buttons
+            .forEach((deleteButton, index) => { // then we used forEach to loop through this list
+                deleteButton.addEventListener('click', () => { // then for each delete button we ran the click event listener and ran the same code as we did before
+                    todoList.splice(index, 1);
+                    renderTodoList();
+                });
+            });
+
     });
 
     // for (let i = 0; i < todoList1,length; i++){
@@ -78,6 +100,11 @@ function renderTodoList(){
 
 }
 
+
+document.querySelector('.js-add-todo-button')
+    .addEventListener('click', () => {
+        addTodo();
+    });
 
 function addTodo() {
     const inputElement = document.querySelector('.js-name-input'); // This gets the element with the class of js-name-input and inputs it into our javascript
