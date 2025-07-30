@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DOM Projects</title>
+    </head>
+    <body>
+        <p>
+            YouTube Subscribe Button 
+        </p>
+        <button onclick="
+                subscribe();
+            " class="js-subscribe-button">
+            Subscribe 
+        </button>
+
+        <p>
+            Amazon Shipping Calculator
+        </p>
+
+        <!--
+        onkeydown let's you do something or something happen when the keyboard is being used. it's similar to onclick
+        here it is sending a message to the console that the user is typing  -> onkeydown="console.log('typing')"
+
+        clicks, keydowns => events
+        onclick, onkeydown => event listeners
+
+        now we need to check if when we press a key on the keyboard if the key is the enter key. If it is then do the same thing as the calculate button
+        onkeydown="console.log(event.key);
+        -->
+        <input placeholder="Cost of order" 
+        onkeydown="handleCostKeydown(event)">;  
+
+        <button onclick="calculateTotal()"
+            class="js-cost-input"
+        > 
+            Calculate
+        </button>
+
+        <p class="js-total-cost"></p>
+        
+    </body>
+    <script>
+        String(26); // convert the number 26 to a string
+        console.log('25' - 5);  // if a string only contains a number and we -*/ JS will convert it to a number for us 
+        // Output 20
+
+        console.log('25' + 5);
+        // Output 255
+
+        // The document object represents the web page. The window object represents the browser. Therefore the document object is inside the window object
+
+        window.document
+        window.console.log('window'); // The console is also part of the browser
+
+        window.alert
+        // we don't have to type window at the front because JS adds it for automatically 
+
+        function handleCostKeydown(event) {
+            console.log(event.key);
+
+            if (event.key === 'Enter') {
+                calculateTotal();
+           }
+        }
+
+
+        function calculateTotal() {
+            const inputElement = document.querySelector('js-cost-input'); // get the input element (user input) from the page and save to variable
+            
+            // let cost = inputElement.value; // we normally use innerHTML but we will use inputElement.value because we are dealing with an input tag to get the HTML value in the element or the text in the textbox
+
+            // when we get a value from the DOM the value will be a string so the user input is currently a string that needs to be converted to a number
+            // Instead of let cost = inputElement.value; Use:
+            let cost = Number(inputElement.value);
+
+            if (cost < 40) {
+                cost += 10; // $10 for shipping if cost is less than 40 bucks
+            }
+
+            document.querySelector('.js-tota-cost')
+                .innerHTML = `${cost}`;
+        }
+
+
+        function subscribe() {
+            const buttonElement = document.querySelector('.js-subscribe-button');
+            if (buttonElement.innerText === 'Subscribe') {
+                buttonElement.innerHTML = 'Subscribed';
+            } else {
+                buttonElement.innerHTML = 'Subscribe'; 
+            }
+        }
+    </script>
+</html>
