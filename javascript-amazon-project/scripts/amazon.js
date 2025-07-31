@@ -4,31 +4,39 @@
 // 3. Make it interactive
 
 // SAVE THE DATA
-const products = [{
-    image: 'images/products/athletic-cotton-socks-6-pairs.jpg',
-    name: 'Black and Gray Athletic Cotton Socks - 6 Pairs',
-    rating: {
-        stars: 4.5,
-        count: 87
-    },
-    priceCents: 1090, // save price in cents to avoid issues with JS
-}, {
-    image: 'images/products/intermediate-composite-basketball.jpg',
-    name: 'Intermediate Size Basketball',
-    rating: {
-        stars: 4,
-        count: 127
-    },
-    priceCents: 2095, // save price in cents to avoid issues with JS
-}, {
-    image: 'images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg',
-    name: 'Adults Plain Cotton T-Shirt - 2 Pack',
-    rating: {
-        stars: 4.5,
-        count: 56
-    },
-    priceCents: 799,
-}]; // ensure each product has the same structure (variables) so that our code can handle all of them the same
+// const products = [{
+//     image: 'images/products/athletic-cotton-socks-6-pairs.jpg',
+//     name: 'Black and Gray Athletic Cotton Socks - 6 Pairs',
+//     rating: {
+//         stars: 4.5,
+//         count: 87
+//     },
+//     priceCents: 1090, // save price in cents to avoid issues with JS
+// }, {
+//     image: 'images/products/intermediate-composite-basketball.jpg',
+//     name: 'Intermediate Size Basketball',
+//     rating: {
+//         stars: 4,
+//         count: 127
+//     },
+//     priceCents: 2095, // save price in cents to avoid issues with JS
+// }, {
+//     image: 'images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg',
+//     name: 'Adults Plain Cotton T-Shirt - 2 Pack',
+//     rating: {
+//         stars: 4.5,
+//         count: 56
+//     },
+//     priceCents: 799,
+// }, {
+//     image: 'images/products/black-2-slot-toaster.jpg',
+//     name: '2 Slot Toaster - Black',
+//     rating: {
+//         stars: 5,
+//         count: 2197
+//     },
+//     priceCents: 1899,
+// }]; // ensure each product has the same structure (variables) so that our code can handle all of them the same
 
 
 let productsHTML = ''; ///for adding html to the website step 3
