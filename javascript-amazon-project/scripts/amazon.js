@@ -38,6 +38,9 @@
 //     priceCents: 1899,
 // }]; // ensure each product has the same structure (variables) so that our code can handle all of them the same
 
+import { cart, addToCart } from "../data/cart";
+import { products } from "../data/products";
+
 
 let productsHTML = ''; ///for adding html to the website step 3
 // NOW GENERATE THE HTML WITH THIS
@@ -105,6 +108,21 @@ document.querySelector('.js-products-grid') //gonna look for a class js-products
 
 // NOW MAKE IT INTERACTIVE
 // Add to cart
+
+
+
+function updateCartQuantity() {
+     // CALCULATE THE QUANTITY OF THE CART
+    let cartQuantity = 0;
+
+    cart.forEach((cartItem) => {
+        cartQuantity += cartItem.quantity;
+    });
+    // now add this to the cart icon in the header on the page
+    document.querySelector('.js-cart-quantity')
+        .innerHTML = cartQuantity;
+}
+
 document.querySelectorAll('js-add-to-cart')
     .forEach((button) => {
         button.addEventListener('click', () => {
@@ -114,30 +132,18 @@ document.querySelectorAll('js-add-to-cart')
             // Data Attribute syntax -> an html attribute that needs to start with 'data-' then any name. It has a name and value.
             const productId = button.dataset.productId; // dataset properties gives all data attributes of the element
             
-            let matchingItem;
+            addToCart(productId);
 
-            cart.forEach((item) => {
-                if (productId === item.productId) {
-                    matchingItem = item;
-                };
-            });
-
-            if (matchingItem) {
-                matchingItem.quantity += 1;
-            } else {
-                cart.push({
-                    productId: productId,
-                    quantity: 1
-                });
-            }
-            // CALCULATE THE QUANTITY OF THE CART
-            let cartQuantity = 0;
-
-            cart.forEach((item) => {
-                cartQuantity += item.quantity;
-            });
-            // now add this to the cart icon in the header on the page
-            document.querySelector('.js-cart-quantity')
-                .innerHTML = cartQuantity;
+            updateCartQuantity();
         });
     });
+
+    // Create a module
+    // Step 1 - create a file
+    // Step 2 -  Don't load the file with the script tag <script></script>
+
+
+    // How to get a variable out of a file
+    // 1. att type="module" attribute
+    // 2. export
+    // 3. import
