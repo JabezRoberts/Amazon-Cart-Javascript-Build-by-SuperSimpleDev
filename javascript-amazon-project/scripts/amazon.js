@@ -68,7 +68,7 @@ products.forEach((product) => {
           </div>
 
           <div class="product-price">
-            $${formatCurrency(matchingProduct.priceCents)}
+            $${formatCurrency(product.priceCents)}
           </div>
 
           <div class="product-quantity-container">
@@ -102,7 +102,7 @@ products.forEach((product) => {
 });
 // NOW COMBINE HTML INTO ONE STRING AND PUT IT ON THE WEB PAGE
 
-console.log(productsHTML); // all our html is  now combined. now to put it on the web page using the DOM. We first need to get the element from the html page into our JS then replace all the html on the web page with the content above from our Javascript
+// console.log(productsHTML); // all our html is  now combined. now to put it on the web page using the DOM. We first need to get the element from the html page into our JS then replace all the html on the web page with the content above from our Javascript
 
 document.querySelector('.js-products-grid') //gonna look for a class js-products-grid, take this element and put it in our Javascript
     .innerHTML = productsHTML; 
@@ -124,7 +124,7 @@ function updateCartQuantity() {
         .innerHTML = cartQuantity;
 }
 
-document.querySelectorAll('js-add-to-cart')
+document.querySelectorAll('.js-add-to-cart')
     .forEach((button) => {
         button.addEventListener('click', () => {
             // we could push the product object to cart with name and quantity but how will we know will product should be added? 
