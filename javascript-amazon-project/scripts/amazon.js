@@ -130,5 +130,14 @@ document.querySelectorAll('js-add-to-cart')
                     quantity: 1
                 });
             }
+            // CALCULATE THE QUANTITY OF THE CART
+            let cartQuantity = 0;
+
+            cart.forEach((item) => {
+                cartQuantity += item.quantity;
+            });
+            // now add this to the cart icon in the header on the page
+            document.querySelector('.js-cart-quantity')
+                .innerHTML = cartQuantity;
         });
     });
