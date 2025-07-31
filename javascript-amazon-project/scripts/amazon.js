@@ -38,8 +38,8 @@
 //     priceCents: 1899,
 // }]; // ensure each product has the same structure (variables) so that our code can handle all of them the same
 
-import { cart, addToCart } from "../data/cart";
-import { products } from "../data/products";
+import { cart, addToCart } from "../data/cart.js";
+import { products } from "../data/products.js";
 
 
 let productsHTML = ''; ///for adding html to the website step 3
