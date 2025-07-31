@@ -89,7 +89,8 @@ products.forEach((product) => {
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">
+          <button class="add-to-cart-button button-primary js-add-to-cart"
+          data-product-id="${product.id}">
             Add to Cart
           </button>
         </div>
@@ -101,3 +102,33 @@ console.log(productsHTML); // all our html is  now combined. now to put it on th
 
 document.querySelector('.js-products-grid') //gonna look for a class js-products-grid, take this element and put it in our Javascript
     .innerHTML = productsHTML; 
+
+// NOW MAKE IT INTERACTIVE
+// Add to cart
+document.querySelectorAll('js-add-to-cart')
+    .forEach((button) => {
+        button.addEventListener('click', () => {
+            // we could push the product object to cart with name and quantity but how will we know will product should be added? 
+            // For this we will use the Data Attribute HTML feature
+            // A Data Attribute that allows us to attach any information to an HTML element
+            // Data Attribute syntax -> an html attribute that needs to start with 'data-' then any name. It has a name and value.
+            const productId = button.dataset.productId; // dataset properties gives all data attributes of the element
+            
+            let matchingItem;
+
+            cart.forEach((item) => {
+                if (productId === item.productId) {
+                    matchingItem = item;
+                };
+            });
+
+            if (matchingItem) {
+                matchingItem.quantity += 1;
+            } else {
+                cart.push({
+                    productId: productId,
+                    quantity: 1
+                });
+            }
+        });
+    });
