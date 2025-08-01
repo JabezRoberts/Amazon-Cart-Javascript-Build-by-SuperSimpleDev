@@ -69,13 +69,24 @@ async function loadPage() { // async makes a function return a promise
     // loadProductsFetch().then(() => {
 
     // }); // this fxn returns a promise but await gives us another way to wait for this promise. This code becomes
+    // Use try catch to handle errors in async await
+
+    try {
+        // throw 'error1';  manually create an error to send us straight to catch
     await loadProductsFetch(); // no need for .then
 
-    await new Promise((resolve) => {
+    await new Promise((resolve, reject) => {
+        // two ways to put an error in a promise. throw if you are giving the error now and adding a reject variable to the promise function if you are creating the error in the future. Throw does not work with functions that should run in the future like loadCart() below
+        // reject() is a function that lets us create an error in the future
         loadCart(() => {
+            // reject('error 3'); reject created an error in the future then it goes to catch to run the error code
             resolve();
         });
     });
+
+    } catch (error) {
+        console.log('Unexpected error. Please try again later.');
+    }
 
     /*
     If we resolve to a value we can save it to a variable instead of passing it to .then() as a param in its function like we normally do. See below

@@ -80,6 +80,8 @@ export function loadProductsFetch() {
       }
         return new Product(productDetails);
       });
+  }).catch((error) => { // catch all errors. it takes a param called error that has information about the error
+    console.log('Unexpected error. Please try again later.');
   });
 
   return promise;
@@ -104,6 +106,10 @@ export function loadProducts(fxn) {
       fxn();
       // fxn is function we provide to load product is called a Callback. This is a function that we give that will run in the future for eg. setTimeout
 
+  });
+
+  xhr.addEventListener('error', (error) => { // (error) has information about the error
+    console.log('Unexpected error. Please try again later.'); // Error handling
   });
 
 
