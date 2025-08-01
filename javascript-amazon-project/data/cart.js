@@ -91,3 +91,18 @@ export function updateDeliveryOption(productId, deliveryOptionId){
 
     saveToStorage();
 }
+
+export function loadCart(fxn) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener('load', () => {
+    console.log(xhr.response);
+    fxn();
+    // fxn is function we provide to load product is called a Callback. This is a function that we give that will run in the future for eg. setTimeout
+
+  });
+
+
+  xhr.open('GET', 'https://supersimplebackend.dev/cart');
+  xhr.send(); // need to be async so it waits for a response to return so set up eventListener xhr.response
+}
