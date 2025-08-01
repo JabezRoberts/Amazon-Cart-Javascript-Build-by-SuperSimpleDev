@@ -63,6 +63,33 @@ class Clothing extends Product {
 
 export let products = [];
 
+// fetch() uses a promise to make requests to the backend
+export function loadProductsFetch() {
+  // by default fetch() makes a get request to the given URL. This will create a Promise and we can use it to get the response to this fetch get request. It will store the response in the response variable the .then() gets
+
+  const promise = fetch(
+    'https://supersimplebackend.dev/products'
+  ).then((response) => {
+    // Get the data attached to the response. response.json() is async and returns a promise
+    // returning a promise means the code will wait for this promise to finish before going to the next step
+    return response.json();
+  }).then((productsData) => {
+    products = productsData.map((productDetails) => {
+      if (productDetails.type === 'clothing') {
+        return new Clothing(productDetails);
+      }
+        return new Product(productDetails);
+      });
+  });
+
+  return promise;
+}
+/*
+loadProducts.then(() => {
+  console.log('next step');
+})
+*/
+
 export function loadProducts(fxn) {
   const xhr = new XMLHttpRequest();
 
