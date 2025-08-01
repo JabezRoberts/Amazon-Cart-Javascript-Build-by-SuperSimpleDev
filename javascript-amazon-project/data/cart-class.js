@@ -16,19 +16,19 @@
 
 class Cart{
     cartItems; // same as cartItems = undefined;
-    localStorageKey;
+    #localStorageKey; // # makes localStorageKey private meaning it can only be accessed and changed inside the class
 
     constructor(localStorageKey) {
-        this.localStorageKey = localStorageKey; // load cart and business cart from storage
-        this.loadFromStorage(); // use this. not cart. because the object generated will not always be called cart. For example we generate businessCart below
+        this.#localStorageKey = localStorageKey; // load cart and business cart from storage
+        this.#loadFromStorage(); // use this. not cart. because the object generated will not always be called cart. For example we generate businessCart below
         
         // cart and businessCart are objects genereated from the class and are known as instances.
         // Constructors lets us run setup code and put it inside allowing us to code cleaner because we can group everything together
 
     }
     
-    loadFromStorage() {
-    this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey)); 
+    #loadFromStorage() { // # makes local storage a private method
+    this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey)); 
     if (!this.cartItems) {
         this.cartItems = [{
             productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
@@ -44,7 +44,7 @@ class Cart{
     }
 
     saveToStorage() { // setItem takes the name of what to save and then the data of what to save as a string
-        localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+        localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
     }
 
     addToCart(productId) {
