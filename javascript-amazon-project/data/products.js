@@ -61,6 +61,32 @@ class Clothing extends Product {
 }
 
 
+export let products = [];
+
+export function loadProducts(fxn) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.addEventListener('load', () => {
+    products = JSON.parse(xhr.response).map((productDetails) => {
+      if (productDetails.type === 'clothing') {
+        return new Clothing(productDetails);
+      }
+        return new Product(productDetails);
+      });
+
+      fxn();
+      // fxn is function we provide to load product is called a Callback. This is a function that we give that will run in the future for eg. setTimeout
+
+  });
+
+
+  xhr.open('GET', 'https://supersimplebackend.dev/products');
+  xhr.send(); // need to be async so it waits for a response to return so set up eventListener xhr.response
+}
+
+
+
+/*
 export const products = [ // convert all our products from regular objects into this product class
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -726,3 +752,30 @@ export const products = [ // convert all our products from regular objects into 
   }
   return new Product(productDetails);
 });
+*/
+
+// 'this' let's an object access its own properties
+
+/*
+1. Inside a method, 'this' points to the outer object
+const object3 = {
+  method() {
+    console.log(this);
+  }
+}
+
+2. Inside a function, 'this' = undefined
+function logThis() {
+  console.log(this);
+}
+logThis.call('hello');
+
+3. Arrow functions do not change the value of 'this'
+console.log(this);
+
+[1, 2, 3].forEach(() => {
+  console.log(this);
+});
+if there is an object to point to, 'this' will point to it. If there is no object to point to 'this' will be undefined.
+
+*/
