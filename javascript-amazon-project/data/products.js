@@ -34,6 +34,30 @@ class Product {
   getPrice() {
     return `$${formatCurrency(this.priceCents)}`;
   }
+
+  extraInfoHTML() {
+    return '';
+  }
+}
+
+
+class Clothing extends Product {
+  sizeChartLink;
+
+
+  constructor(productDetails) {
+    super(productDetails); // call the constructor of the parent class Product and set the id, name, image, etc
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+
+  extraInfoHTML() {
+    // super().extraInfoHTML(); this calls the parents method of extraInfoHTML
+    return `
+      <a href="${this.sizeChartLink}" target="_blank">
+        Size Chart
+      </a>
+    `;
+  }
 }
 
 
@@ -81,7 +105,7 @@ export const products = [ // convert all our products from regular objects into 
       "apparel",
       "mens"
     ],
-    type: "clothing",
+    type: "clothing", // A discriminator property that tells us what to convert to clothing and what to convert to products
     sizeChartLink: "images/clothing-size-chart.png"
   },
   {
@@ -697,5 +721,8 @@ export const products = [ // convert all our products from regular objects into 
     ]
   }
 ].map((productDetails) => {
+  if (productDetails.type === 'clothing') {
+    return new Clothing(productDetails);
+  }
   return new Product(productDetails);
 });
