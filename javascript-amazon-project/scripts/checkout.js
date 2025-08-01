@@ -15,8 +15,91 @@ Promises
 */
 // Promise.all() lets us run multiple promises at the same time and wat for all of them to finish
 
+// Async await is a shortcut for promises and removes all the extra code
+/*
+async function loadPage() { // async makes a function return a promise
+    console.log('load page');
+}
+*/
+// The code above is the same as 
+/*
+function loadPage() {
+    return new Promise ((resolve) => {
+        console.log('load page');
+        resolve();
+    });
+}
+*/
+
+// we use async because it lets us use await. Await let's us wait for the promise to finish before going to the next line
+/*
+async function loadPage() { // async makes a function return a promise
+    console.log('load page');*/
+
+    // loadProductsFetch().then(() => {
+
+    // }); // this fxn returns a promise but await gives us another way to wait for this promise. This code becomes
+    /*
+    await loadProductsFetch(); // no need for .then
+
+    await new Promise((resolve) => {
+        loadCart(() => {
+            resolve();
+        });
+    });
+
+    renderOrderSummary();
+    renderPaymentSummary();
+    */
+
+    // async-await let's us write synchronous code like regular code
+
+/*
+    return value2;
+}
+loadPage().then((value) => {
+    console.log('next step');
+    console.log(value); // value is equal to the strign value2 so value2 is logged to the console
+})
+*/
+
+async function loadPage() { // async makes a function return a promise
+    console.log('load page');
+
+    // loadProductsFetch().then(() => {
+
+    // }); // this fxn returns a promise but await gives us another way to wait for this promise. This code becomes
+    await loadProductsFetch(); // no need for .then
+
+    await new Promise((resolve) => {
+        loadCart(() => {
+            resolve();
+        });
+    });
+
+    /*
+    If we resolve to a value we can save it to a variable instead of passing it to .then() as a param in its function like we normally do. See below
+    
+    const value =  await new Promise((resolve) => {
+        loadCart(() => {
+            resolve('value 3'); value 3 will be saved to value
+        });
+    });
+    */
+    renderOrderSummary();
+    renderPaymentSummary();
+
+    // async-await let's us write synchronous code like regular code
+
+
+    return value2;
+}
+loadPage();
+
+
+/*
 Promise.all([
-    loadProductsFetch(),
+    loadProductsFetch(),*/
     // new Promise((resolve) => { // resolve is a function similar to done that let us control when to go to the next step
     // console.log('start promise'); // this goes to the console first
     // console.log('promise'); // this inside Promise will run immediately
@@ -26,6 +109,7 @@ Promise.all([
     //   when a promise finishes it can do the next step that is seperate from the rest of the code. It is in .then()
     //     });
     // }),
+    /*
     new Promise((resolve) => {
         loadCart(() => {
             resolve();
@@ -35,6 +119,7 @@ Promise.all([
     renderOrderSummary();
     renderPaymentSummary();
 });
+*/
 
 /*
 
